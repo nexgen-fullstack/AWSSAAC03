@@ -526,6 +526,8 @@ section.module h2{display:block;font-size:.9rem;text-transform:uppercase;letter-
 .disclaimer{font-size:.8rem;color:var(--muted);margin:26px 0 0}
 .install-card{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;background:var(--surface);border:1px dashed var(--accent);border-radius:14px;padding:10px 14px;margin:0 0 12px}
 .install-card .muted{font-size:.88rem}
+.deep-card{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;background:var(--accent-soft);border:1px solid var(--accent);border-radius:14px;padding:10px 14px;margin:0 0 12px}
+.deep-card .tb-btn{text-decoration:none}
 .offline-ok{font-size:.85rem;color:var(--ok);margin:0 0 10px}
 article.lesson{max-width:800px;margin:0 auto 18px;padding:20px 24px}
 .lesson-top{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:space-between;font-size:.88rem}
@@ -728,7 +730,7 @@ body.modal-open{overflow:hidden}
   p,li{margin:3px 0}
   h3{margin:10px 0 4px}
   h4{margin:9px 0 5px}
-  .topbar,.tabs,.toc,.scrim,.learn-btn,.to-top,.skip,.how,.foot,.progress-line,.seg,.hint-chip,.svc-overlay,.lesson-nav,.lesson-top .back,.progress-card,.quiz-links,.install-card,.ask-overlay,.offline-ok,#learn-summary{display:none!important}
+  .topbar,.tabs,.toc,.scrim,.learn-btn,.to-top,.skip,.how,.foot,.progress-line,.seg,.hint-chip,.svc-overlay,.lesson-nav,.lesson-top .back,.progress-card,.quiz-links,.install-card,.deep-card,.ask-overlay,.offline-ok,#learn-summary{display:none!important}
   body.print-lessons article a[href^="#fig-"]::after{content:" (у PDF «Шпаргалка»)";color:var(--muted);font-weight:400}
   .svc{text-decoration:none!important;background:none!important}
   .view{display:none!important}
@@ -1517,6 +1519,9 @@ def build_learn(lessons, sec_by_num):
             f'<div class="progress-card"><div class="bar"><span id="learn-bar"></span></div><p id="learn-progress-text"></p>'
             f'<a class="tb-btn primary" id="learn-continue" href="#learn/{lessons[0]["id"]}">▶ Почати</a></div>'
             f'<div class="stats" id="learn-summary"></div>'
+            f'<div class="deep-card"><span>📘 <b>Глибоке навчання</b> — повний курс з нуля: 46 розділів з поясненнями, схемами '
+            f'й лабораторіями, два пробні іспити, окремий офлайн-застосунок.</span>'
+            f'<a class="tb-btn primary" href="deep/">Відкрити →</a></div>'
             f'<div class="install-card" id="install-card" hidden><span>📲 <b>Встанови як застосунок</b> — відкриватиметься з головного екрана '
             f'і працюватиме без інтернету.</span><button class="tb-btn primary" id="btn-install" type="button" hidden>Встановити</button>'
             f'<span class="muted" id="install-ios" hidden>iPhone: Safari → «Поділитися» → «На початковий екран».</span></div>'
@@ -1667,9 +1672,13 @@ self.addEventListener('activate', e => {
     .then(() => self.clients.claim()));
 });
 self.addEventListener('fetch', e => {
-  const req = e.request;
-  if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
+  const req = e.request, url = new URL(req.url);
+  if (req.method !== 'GET' || url.origin !== location.origin) return;
+  // «Глибоке навчання» (deep/) — окремий сайт зі своїм service worker: не кешуємо його тут
+  const rel = url.pathname.slice(new URL(self.registration.scope).pathname.length);
+  if (rel.startsWith('deep/')) return;
   if (req.mode === 'navigate') {
+    if (rel !== '' && rel !== 'index.html') return;
     e.respondWith(fetch(req).then(res => {
       const copy = res.clone();
       caches.open(CACHE).then(c => c.put('./index.html', copy));
