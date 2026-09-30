@@ -428,11 +428,17 @@ def parse_chapters():
     return chapters
 
 
-def parse_entries(path, seen_alias, cat_default=None):
+def parse_entries(path, seen_alias, cat_default=None, extra=None):
     text = path.read_text(encoding="utf-8")
     entries = []
     for block in re.split(r"^## ", text, flags=re.M)[1:]:
         lines = [l.strip() for l in block.strip().splitlines() if l.strip()]
+        if lines[0].startswith("@"):
+            # «## @id» + «ALIASES: …» — додаткові (українські) аліаси до наявного запису
+            if extra is None or len(lines) != 2 or not lines[1].startswith("ALIASES:"):
+                raise ValueError(f"{path.name}: поганий блок аліасів: {lines[0][:60]}")
+            extra.append((lines[0][1:].strip(), [a.strip() for a in lines[1][8:].split(",") if a.strip()]))
+            continue
         head = [x.strip() for x in lines[0].split("|")]
         if len(head) != 5:
             raise ValueError(f"{path.name}: поганий заголовок: {lines[0][:60]}")
@@ -470,13 +476,22 @@ def parse_entries(path, seen_alias, cat_default=None):
 
 
 def parse_services(chapters):
-    seen = {}
+    seen, extra = {}, []
     entries = parse_entries(V2 / "services.md", seen)
     if (SRC / "glossary.md").exists():
-        entries += parse_entries(SRC / "glossary.md", seen)
+        entries += parse_entries(SRC / "glossary.md", seen, extra=extra)
     ids = {e["id"] for e in entries}
     if len(ids) != len(entries):
         raise ValueError("Повторюються id у довіднику")
+    byid = {e["id"]: e for e in entries}
+    for sid, als in extra:
+        if sid not in byid:
+            raise ValueError(f"glossary.md: аліаси для невідомого запису {sid}")
+        for a in als:
+            if a in seen:
+                raise ValueError(f"Аліас «{a}» є і в {seen[a]}, і в {sid}")
+            seen[a] = sid
+            byid[sid]["aliases"].append(a)
     for e in entries:
         for c in e["confuse"]:
             if c not in ids:
@@ -1118,6 +1133,7 @@ JS = r"""
     $('#svc-what').innerHTML=s.what;
     $('#svc-image').innerHTML=s.image?'<b>🖼️ Образ.</b> '+s.image:''; $('#svc-image').hidden=!s.image;
     $('#svc-when').innerHTML=s.when.map(function(w){return '<li>'+w+'</li>'}).join(''); $('#svc-when-h').hidden=!s.when.length;
+    $('#svc-when-h').textContent=(s.cat==='it'||s.cat==='concept')?'📍 Де зустрінеш':'✅ Коли обирати';
     $('#svc-exam').innerHTML=s.exam.map(function(x){return '<li>'+x+'</li>'}).join(''); $('#svc-exam-h').hidden=!s.exam.length;
     $('#svc-confuse').innerHTML=s.confuse.length?('<span class="muted">Не плутай з:</span> '+s.confuse.map(function(c){var o=SMAP[c];
       return o?'<button class="chip-btn" type="button" data-open="'+c+'">'+o.emoji+' '+esc(o.name)+'</button>':''}).join(' ')):'';
