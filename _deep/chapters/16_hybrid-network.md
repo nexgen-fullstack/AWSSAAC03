@@ -70,8 +70,8 @@ Direct Connect — приватний канал, але **не зашифров
 <figure class="diagram" data-caption="Стійкість Direct Connect: від дешевого до максимального">
 <div class="grid3">
 <div class="gcard"><b>💲 DX + VPN резерв</b>Один DX-канал, а при збої — Site-to-Site VPN через інтернет<small>Найдешевший резерв; швидкість резерву нижча</small></div>
-<div class="gcard"><b>💲💲 High resiliency</b>По одному каналу в <b>двох різних DX-локаціях</b><small>Переживає втрату цілої локації</small></div>
-<div class="gcard hl"><b>💲💲💲 Maximum resiliency</b>Два канали на різних пристроях у <b>кожній з двох DX-локацій</b><small>Переживає і втрату локації, і збій пристрою — для критичних систем</small></div>
+<div class="gcard"><b>💲💲 High resiliency</b>По одному каналу в <strong>двох різних DX-локаціях</strong><small>Переживає втрату цілої локації</small></div>
+<div class="gcard hl"><b>💲💲💲 Maximum resiliency</b>Два канали на різних пристроях у <strong>кожній з двох DX-локацій</strong><small>Переживає і втрату локації, і збій пристрою — для критичних систем</small></div>
 </div>
 <figcaption>На іспиті: «максимальна стійкість гібридного з'єднання» → кілька DX у різних локаціях; «найдешевший резерв для DX» → Site-to-Site VPN.</figcaption>
 </figure>

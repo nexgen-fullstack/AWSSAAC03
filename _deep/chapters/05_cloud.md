@@ -100,9 +100,9 @@ AWS формулює переваги хмари шістьма тезами —
 
 <figure class="diagram" data-caption="Хто за що відповідає: EC2, RDS і Lambda/S3">
 <div class="grid3">
-<div class="gcard"><b>🖥️ EC2 (IaaS)</b><small><b>Ти:</b> дані, доступи IAM, Security Groups, <b>ОС і її патчі</b>, програми, шифрування<br><b>AWS:</b> залізо, мережа, гіпервізор, дата-центр</small></div>
-<div class="gcard"><b>🐬 RDS (керована БД)</b><small><b>Ти:</b> дані, користувачі БД і права, Security Groups, чи ввімкнене шифрування, вікно обслуговування<br><b>AWS:</b> ОС, <b>патчі рушія БД</b>, бекапи за твоїми налаштуваннями, залізо</small></div>
-<div class="gcard"><b>⚡ Lambda, S3, DynamoDB</b><small><b>Ти:</b> дані, код, політики доступу, налаштування (наприклад, щоб bucket не був публічним)<br><b>AWS:</b> усе інше — сервери, ОС, середовище виконання, масштабування</small></div>
+<div class="gcard"><b>🖥️ EC2 (IaaS)</b><small><strong>Ти:</strong> дані, доступи IAM, Security Groups, <strong>ОС і її патчі</strong>, програми, шифрування<br><strong>AWS:</strong> залізо, мережа, гіпервізор, дата-центр</small></div>
+<div class="gcard"><b>🐬 RDS (керована БД)</b><small><strong>Ти:</strong> дані, користувачі БД і права, Security Groups, чи ввімкнене шифрування, вікно обслуговування<br><strong>AWS:</strong> ОС, <strong>патчі рушія БД</strong>, бекапи за твоїми налаштуваннями, залізо</small></div>
+<div class="gcard"><b>⚡ Lambda, S3, DynamoDB</b><small><strong>Ти:</strong> дані, код, політики доступу, налаштування (наприклад, щоб bucket не був публічним)<br><strong>AWS:</strong> усе інше — сервери, ОС, середовище виконання, масштабування</small></div>
 </div>
 <figcaption>Незмінне в усіх випадках: твої дані й доступи до них — завжди твоя відповідальність. Якщо bucket S3 став публічним через налаштування клієнта — це не «злам AWS».</figcaption>
 </figure>

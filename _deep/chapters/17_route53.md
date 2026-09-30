@@ -49,8 +49,8 @@ svc: route53
 <div class="gcard"><b>3. Latency-based</b>Регіон з найменшою затримкою для цього користувача.<small>Глобальний застосунок у кількох регіонах</small></div>
 <div class="gcard"><b>4. Failover</b>Primary, а якщо health check провалено — secondary.<small>Active-passive DR, сторінка «технічні роботи»</small></div>
 <div class="gcard"><b>5. Geolocation</b>За країною / континентом користувача (+ запис за замовчуванням).<small>Мовні версії, ліцензії, закони, заборони</small></div>
-<div class="gcard"><b>6. Geoproximity</b>За відстанню до ресурсу, з <b>bias</b> — «розширити» чи «стиснути» зону ресурсу.<small>Змістити частку трафіку до одного регіону</small></div>
-<div class="gcard"><b>7. Multivalue answer</b>До 8 <b>здорових</b> записів у відповіді.<small>Простий розподіл на боці клієнта з перевіркою здоров'я (не заміна балансувальника)</small></div>
+<div class="gcard"><b>6. Geoproximity</b>За відстанню до ресурсу, з <strong>bias</strong> — «розширити» чи «стиснути» зону ресурсу.<small>Змістити частку трафіку до одного регіону</small></div>
+<div class="gcard"><b>7. Multivalue answer</b>До 8 <strong>здорових</strong> записів у відповіді.<small>Простий розподіл на боці клієнта з перевіркою здоров'я (не заміна балансувальника)</small></div>
 <div class="gcard"><b>8. IP-based</b>За діапазоном IP клієнта (CIDR-колекції).<small>Трафік певного провайдера — на певний endpoint</small></div>
 </div>
 <figcaption>Політики можна комбінувати деревом: наприклад, latency між регіонами, а всередині кожного регіону — weighted між версіями.</figcaption>

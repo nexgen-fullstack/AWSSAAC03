@@ -23,8 +23,8 @@ svc: endpoints, privatelink, peering, tgw
 
 <figure class="diagram" data-caption="Gateway endpoint і interface endpoint">
 <div class="grid2">
-<div class="gcard"><b>🚪 Gateway endpoint</b>Запис у <b>таблиці маршрутів</b>: «трафік до S3 → vpce-…»<small>✅ Лише <b>S3 і DynamoDB</b><br>✅ <b>Безкоштовний</b><br>⚠️ Працює лише для ресурсів у цій VPC — не з офісу через VPN/DX і не з іншої VPC</small></div>
-<div class="gcard"><b>🪟 Interface endpoint (PrivateLink)</b><b>Мережевий інтерфейс (ENI)</b> з приватною IP у твоїй підмережі; до нього прикріплюється Security Group<small>✅ Майже всі сервіси: SQS, SNS, KMS, Secrets Manager, SSM, ECR, CloudWatch, STS, API Gateway, S3…<br>💲 Платний: за годину в кожній AZ + за гігабайт<br>✅ Доступний з офісу (VPN/DX) і з інших VPC</small></div>
+<div class="gcard"><b>🚪 Gateway endpoint</b>Запис у <strong>таблиці маршрутів</strong>: «трафік до S3 → vpce-…»<small>✅ Лише <strong>S3 і DynamoDB</strong><br>✅ <strong>Безкоштовний</strong><br>⚠️ Працює лише для ресурсів у цій VPC — не з офісу через VPN/DX і не з іншої VPC</small></div>
+<div class="gcard"><b>🪟 Interface endpoint (PrivateLink)</b><strong>Мережевий інтерфейс (ENI)</strong> з приватною IP у твоїй підмережі; до нього прикріплюється Security Group<small>✅ Майже всі сервіси: SQS, SNS, KMS, Secrets Manager, SSM, ECR, CloudWatch, STS, API Gateway, S3…<br>💲 Платний: за годину в кожній AZ + за гігабайт<br>✅ Доступний з офісу (VPN/DX) і з інших VPC</small></div>
 </div>
 <figcaption>Для S3 існують обидва. Усередині VPC — безкоштовний gateway. Для доступу до S3 приватно з офісу через Direct Connect — interface endpoint.</figcaption>
 </figure>
@@ -75,8 +75,8 @@ svc: endpoints, privatelink, peering, tgw
 
 <figure class="diagram" data-caption="Peering проти Transit Gateway">
 <div class="grid2">
-<div class="gcard"><b>🔗 VPC Peering</b>A ⇄ B, B ⇄ C, але <b>A ✕ C</b><small>Нетранзитивно. Кожна пара — окреме з'єднання і маршрути. Дешево: лише трафік.</small></div>
-<div class="gcard hl"><b>🚉 Transit Gateway</b>A, B, C, D, офіс (VPN/DX) → <b>один хаб</b><small>Транзитивно, сегментація таблицями, сотні VPC. Плата за підключення і гігабайти.</small></div>
+<div class="gcard"><b>🔗 VPC Peering</b>A ⇄ B, B ⇄ C, але <strong>A ✕ C</strong><small>Нетранзитивно. Кожна пара — окреме з'єднання і маршрути. Дешево: лише трафік.</small></div>
+<div class="gcard hl"><b>🚉 Transit Gateway</b>A, B, C, D, офіс (VPN/DX) → <strong>один хаб</strong><small>Транзитивно, сегментація таблицями, сотні VPC. Плата за підключення і гігабайти.</small></div>
 </div>
 <figcaption>Кілька VPC і великий трафік між ними → peering (дешевше). Десятки VPC плюс офіс, централізований контроль → Transit Gateway.</figcaption>
 </figure>

@@ -54,10 +54,10 @@ ASG постійно перевіряє сервери і **замінює не�
 
 <figure class="diagram" data-caption="Доба Хмаринки в «чорну п'ятницю»: хто що вмикає">
 <div class="grid4">
-<div class="gcard"><b>🌙 03:00</b>Навантаження мінімальне<small>ASG тримає <b>min = 4</b> (по 2 у кожній AZ)</small></div>
-<div class="gcard"><b>🔮 18:00</b>Predictive scaling<small>Прогноз вечірнього піку — сервери додаються <b>заздалегідь</b></small></div>
-<div class="gcard"><b>🗓️ 19:30</b>Scheduled action<small>Старт розпродажу: <b>min = 12</b></small></div>
-<div class="gcard hl"><b>🔥 20:05</b>Target tracking<small>800 запитів на сервер → ASG росте до <b>18</b></small></div>
+<div class="gcard"><b>🌙 03:00</b>Навантаження мінімальне<small>ASG тримає <strong>min = 4</strong> (по 2 у кожній AZ)</small></div>
+<div class="gcard"><b>🔮 18:00</b>Predictive scaling<small>Прогноз вечірнього піку — сервери додаються <strong>заздалегідь</strong></small></div>
+<div class="gcard"><b>🗓️ 19:30</b>Scheduled action<small>Старт розпродажу: <strong>min = 12</strong></small></div>
+<div class="gcard hl"><b>🔥 20:05</b>Target tracking<small>800 запитів на сервер → ASG росте до <strong>18</strong></small></div>
 </div>
 <figcaption>Політики працюють разом: розклад і прогноз готують ємність наперед, а target tracking реагує на реальність. Вранці scheduled action повертає min = 4, і зайве прибирається.</figcaption>
 </figure>

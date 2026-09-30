@@ -731,6 +731,7 @@ article.chapter{max-width:820px;margin:0 auto}
 /* квіз у розділі */
 .qz-list{display:grid;gap:12px;margin:10px 0 14px}
 .qz{border:1px solid var(--border);border-radius:14px;padding:12px 14px;background:var(--surface)}
+.qz,.ch-body p,.ch-body li,.ch-body blockquote{overflow-wrap:anywhere}
 .qz-h{font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
 .qz-q{font-weight:600;margin:4px 0 8px;line-height:1.5}
 .qz-note{font-weight:700;color:var(--warn);font-size:.9rem;margin:0 0 6px}
@@ -784,7 +785,7 @@ article.chapter{max-width:820px;margin:0 auto}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .gcard{border:1px solid var(--border);border-radius:10px;padding:8px 10px;background:var(--surface);font-size:.82rem}
-.gcard b{display:block;font-size:.88rem;margin-bottom:2px}
+.gcard>b{display:block;font-size:.88rem;margin-bottom:2px}
 .gcard small{display:block;color:var(--muted)}
 .gcard.hl{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
 .scale{height:8px;border-radius:99px;background:linear-gradient(90deg,var(--c-sto),var(--c-cmp),var(--c-sec));margin:10px 0 4px}

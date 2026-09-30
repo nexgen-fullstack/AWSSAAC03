@@ -54,9 +54,9 @@ svc: rds, multiaz, readreplica, rdsproxy, pitr
 
 <figure class="diagram" data-caption="Multi-AZ, Multi-AZ cluster і read replicas — для різних цілей">
 <div class="grid3">
-<div class="gcard"><b>🛟 Multi-AZ DB instance</b>Primary + <b>синхронний</b> standby в іншій AZ<small>Мета — <b>доступність</b>. Автоматичний failover ~1–2 хв, той самий endpoint. <b>Standby не читається.</b></small></div>
-<div class="gcard"><b>🛟📖 Multi-AZ DB cluster</b>Writer + 2 <b>читабельні</b> standby у 3 AZ<small>Доступність + трохи читання. Failover зазвичай до 35 с. MySQL і PostgreSQL.</small></div>
-<div class="gcard"><b>📖 Read replicas</b>До 15 <b>асинхронних</b> копій, зокрема в інших регіонах<small>Мета — <b>масштабування читання</b> і DR (promote). Можлива затримка даних, окремі endpoints.</small></div>
+<div class="gcard"><b>🛟 Multi-AZ DB instance</b>Primary + <strong>синхронний</strong> standby в іншій AZ<small>Мета — <strong>доступність</strong>. Автоматичний failover ~1–2 хв, той самий endpoint. <strong>Standby не читається.</strong></small></div>
+<div class="gcard"><b>🛟📖 Multi-AZ DB cluster</b>Writer + 2 <strong>читабельні</strong> standby у 3 AZ<small>Доступність + трохи читання. Failover зазвичай до 35 с. MySQL і PostgreSQL.</small></div>
+<div class="gcard"><b>📖 Read replicas</b>До 15 <strong>асинхронних</strong> копій, зокрема в інших регіонах<small>Мета — <strong>масштабування читання</strong> і DR (promote). Можлива затримка даних, окремі endpoints.</small></div>
 </div>
 <figcaption>На іспиті: «висока доступність, автоматичний failover» → Multi-AZ. «Звіти гальмують базу, багато читань» → read replica. «DR в іншому регіоні недорого» → cross-region read replica.</figcaption>
 </figure>

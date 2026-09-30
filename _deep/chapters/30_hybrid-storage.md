@@ -29,10 +29,10 @@ svc: storagegw, datasync, transfer, snow, s3ta
 
 <figure class="diagram" data-caption="Типи Storage Gateway: як офіс бачить хмару">
 <div class="grid2">
-<div class="gcard"><b>📁 S3 File Gateway</b>Офіс бачить мережеву папку <b>NFS або SMB</b> (з Active Directory). Кожен файл стає <b>об'єктом у S3</b>, «гарячі» файли — у локальному кеші.<small>Далі працюють lifecycle, Glacier, аналітика по S3</small></div>
-<div class="gcard"><b>💽 Volume Gateway</b>Офіс бачить <b>блочні диски iSCSI</b>.<small><b>Cached</b>: основні дані в S3, у кеші — гарячі.<br><b>Stored</b>: усі дані локально, асинхронні бекапи в S3 як знімки EBS</small></div>
-<div class="gcard"><b>📼 Tape Gateway</b>Віртуальна <b>стрічкова бібліотека (VTL)</b> для наявного бекап-ПЗ (Veeam, NetBackup, Commvault…).<small>Стрічки — в S3, архів — у Glacier / Deep Archive. Фізичні стрічки більше не потрібні</small></div>
-<div class="gcard"><b>🪟 FSx File Gateway</b>Локальний кеш для <b>FSx for Windows File Server</b>.<small>З жовтня 2024 недоступний новим клієнтам</small></div>
+<div class="gcard"><b>📁 S3 File Gateway</b>Офіс бачить мережеву папку <strong>NFS або SMB</strong> (з Active Directory). Кожен файл стає <strong>об'єктом у S3</strong>, «гарячі» файли — у локальному кеші.<small>Далі працюють lifecycle, Glacier, аналітика по S3</small></div>
+<div class="gcard"><b>💽 Volume Gateway</b>Офіс бачить <strong>блочні диски iSCSI</strong>.<small><strong>Cached</strong>: основні дані в S3, у кеші — гарячі.<br><strong>Stored</strong>: усі дані локально, асинхронні бекапи в S3 як знімки EBS</small></div>
+<div class="gcard"><b>📼 Tape Gateway</b>Віртуальна <strong>стрічкова бібліотека (VTL)</strong> для наявного бекап-ПЗ (Veeam, NetBackup, Commvault…).<small>Стрічки — в S3, архів — у Glacier / Deep Archive. Фізичні стрічки більше не потрібні</small></div>
+<div class="gcard"><b>🪟 FSx File Gateway</b>Локальний кеш для <strong>FSx for Windows File Server</strong>.<small>З жовтня 2024 недоступний новим клієнтам</small></div>
 </div>
 <figcaption>Спільне для всіх: застосунки в офісі не змінюються, а дані живуть у надійному й масштабованому сховищі AWS.</figcaption>
 </figure>

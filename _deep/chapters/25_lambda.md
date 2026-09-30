@@ -38,9 +38,9 @@ svc: lambda, coldstart
 
 <figure class="diagram" data-caption="Три способи виклику Lambda">
 <div class="grid3">
-<div class="gcard"><b>⏱️ Синхронно</b>Хтось чекає відповіді<small><b>API Gateway, ALB, function URL</b>, виклик з коду/CLI, Cognito<br>Помилку отримує той, хто викликав</small></div>
-<div class="gcard"><b>📨 Асинхронно</b>Подію кладуть у внутрішню чергу Lambda і не чекають<small><b>S3 events, SNS, EventBridge</b><br>При помилці — <b>2 повтори</b>, потім DLQ або destination</small></div>
-<div class="gcard"><b>🔁 Опитування (event source mapping)</b>Lambda сама читає пакети записів з джерела<small><b>SQS, Kinesis, DynamoDB Streams, MSK, Amazon MQ</b><br>Пакети, повтори за правилами джерела</small></div>
+<div class="gcard"><b>⏱️ Синхронно</b>Хтось чекає відповіді<small><strong>API Gateway, ALB, function URL</strong>, виклик з коду/CLI, Cognito<br>Помилку отримує той, хто викликав</small></div>
+<div class="gcard"><b>📨 Асинхронно</b>Подію кладуть у внутрішню чергу Lambda і не чекають<small><strong>S3 events, SNS, EventBridge</strong><br>При помилці — <strong>2 повтори</strong>, потім DLQ або destination</small></div>
+<div class="gcard"><b>🔁 Опитування (event source mapping)</b>Lambda сама читає пакети записів з джерела<small><strong>SQS, Kinesis, DynamoDB Streams, MSK, Amazon MQ</strong><br>Пакети, повтори за правилами джерела</small></div>
 </div>
 <figcaption>Від способу виклику залежить, що буде з помилками: хто повторить і куди подінуться події, що не вдалося обробити.</figcaption>
 </figure>

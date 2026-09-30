@@ -19,8 +19,8 @@ svc: elasticache, memorydb, documentdb, neptune, keyspaces, timestream, opensear
 
 <figure class="diagram" data-caption="Lazy loading (cache-aside) і write-through">
 <div class="grid2">
-<div class="gcard"><b>🐢→⚡ Lazy loading (cache-aside)</b>1) Шукаємо в кеші → <b>hit</b>: віддаємо.<br>2) <b>Miss</b>: читаємо з бази, кладемо в кеш з TTL, віддаємо.<small>✅ У кеші лише те, що справді запитують; збій кешу не зупиняє систему.<br>❌ Перший запит повільний; дані можуть бути застарілими до кінця TTL.</small></div>
-<div class="gcard"><b>✍️ Write-through</b>При кожному <b>записі</b> в базу — одночасно оновлюємо кеш.<small>✅ Кеш завжди свіжий.<br>❌ Кожен запис довший; у кеші лежить і те, що ніхто не читає (лікується TTL).</small></div>
+<div class="gcard"><b>🐢→⚡ Lazy loading (cache-aside)</b>1) Шукаємо в кеші → <strong>hit</strong>: віддаємо.<br>2) <strong>Miss</strong>: читаємо з бази, кладемо в кеш з TTL, віддаємо.<small>✅ У кеші лише те, що справді запитують; збій кешу не зупиняє систему.<br>❌ Перший запит повільний; дані можуть бути застарілими до кінця TTL.</small></div>
+<div class="gcard"><b>✍️ Write-through</b>При кожному <strong>записі</strong> в базу — одночасно оновлюємо кеш.<small>✅ Кеш завжди свіжий.<br>❌ Кожен запис довший; у кеші лежить і те, що ніхто не читає (лікується TTL).</small></div>
 </div>
 <figcaption>Часто їх поєднують: write-through для важливих даних + lazy loading + TTL для всього іншого.</figcaption>
 </figure>
