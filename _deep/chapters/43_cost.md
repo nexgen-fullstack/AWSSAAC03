@@ -137,7 +137,7 @@ svc: costexplorer, cur, anomaly, computeoptimizer
 :::lab 🧪 Спробуй у справжньому AWS: навести лад у витратах за 15 хвилин
 **Вартість:** безкоштовно. **Час:** 15 хвилин (частина даних з'явиться через добу).
 1. **Billing and Cost Management → Cost Explorer**: період — останні 3 місяці, **Group by: Service**, потім **Region** і **Usage type**. Знайди рядки з `DataTransfer` і `NatGateway` — так виглядає «невидимий» трафік. Увімкни **Forecast**.
-2. **Cost allocation tags**: знайди тег `project` (якщо ти позначав ним ресурси в попередніх лабораторіях) і натисни **Activate**. Через добу за ним можна групувати витрати.
+2. **Cost allocation tags**: знайди тег `project` (якщо в попередніх лабораторіях ресурси позначалися ним) і натисни **Activate**. Через добу за ним можна групувати витрати.
 3. **Cost Anomaly Detection → Create monitor**: тип **AWS services**; підписка — email, поріг, наприклад, **$5** або **40%**. Тепер незвичний стрибок не пройде повз тебе.
 4. **Compute Optimizer → Get started → Opt in** (безкоштовно). Рекомендації з'являться після ~30 годин метрик — повернись завтра.
 5. **Cost Optimization Hub → Enable**: сюди стікатимуться всі рекомендації з оцінкою економії.

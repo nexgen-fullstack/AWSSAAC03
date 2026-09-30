@@ -135,7 +135,7 @@ CMD ["node", "server.js"]
 1. **ECS → Clusters → Create cluster**: назва `khmarynka-lab`, інфраструктура — **AWS Fargate (serverless)**. Create.
 2. **Task definitions → Create new**: назва `hello-web`, launch type **Fargate**, CPU `.25 vCPU`, Memory `.5 GB`. Контейнер: ім'я `web`, image URI `public.ecr.aws/nginx/nginx:latest`, port mapping **80**. Create.
 3. Кластер → **Tasks → Run new task**: launch type Fargate, task definition `hello-web`. Networking: твоя VPC, **публічна** підмережа, **Public IP — Turned on**, Security Group з HTTP 80 з My IP. Create.
-4. Коли задача в статусі **Running**, відкрий її → Configuration → **Public IP** — відкрий у браузері: вітальна сторінка nginx. Жодного сервера EC2 ти не створював.
+4. Коли задача в статусі **Running**, відкрий її → Configuration → **Public IP** — відкрий у браузері: вітальна сторінка nginx. Жодного сервера EC2 для цього не знадобилося.
 5. Вкладка **Logs** задачі — журнали контейнера (якщо ввімкнено CloudWatch Logs у task definition).
 6. Подумай: що додати, щоб таких задач завжди було 3 за балансувальником? (Відповідь: **ECS service** з desired count 3 і ALB.)
 **Прибери за собою:** зупини задачу (**Stop**), видали кластер, деактивуй і видали task definition, видали Security Group і журнали в CloudWatch Logs.

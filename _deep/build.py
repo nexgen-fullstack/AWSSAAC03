@@ -1719,7 +1719,7 @@ PAGE = """<!DOCTYPE html>
     </div>
     <div id="pr-cards" hidden>
       <h1>🎴 Картки-тригери</h1>
-      <p class="sub">Тригери з розділів: «бачиш у питанні → обираєш». Спершу відповідай подумки, потім відкривай. Те, що «не знав», повертається частіше.</p>
+      <p class="sub">Тригери з розділів: «бачиш у питанні → обираєш». Спершу відповідай подумки, потім відкривай. Картки з позначкою «Не знаю» повертаються частіше.</p>
       <section class="card">
         <div class="qz-row"><select id="fc-scope" aria-label="Набір карток"><option value="all">Усі розділи</option></select>
           <label class="chk"><input type="checkbox" id="fc-weak"> Лише слабкі</label></div>
@@ -1728,12 +1728,12 @@ PAGE = """<!DOCTYPE html>
         <div class="fc-a" id="fc-a" hidden></div>
         <div class="fc-actions">
           <button class="tb-btn primary" id="fc-show" type="button">Показати відповідь</button>
-          <button class="tb-btn ok" id="fc-know" type="button" hidden>✓ Знав</button>
-          <button class="tb-btn bad" id="fc-dont" type="button" hidden>✗ Не знав</button>
+          <button class="tb-btn ok" id="fc-know" type="button" hidden>✓ Знаю</button>
+          <button class="tb-btn bad" id="fc-dont" type="button" hidden>✗ Не знаю</button>
         </div>
         <div class="pc-stats" id="fc-stats"></div>
       </section>
-      <p class="fc-hint"><kbd>Клавіші: пробіл — показати, → знав, ← не знав.</kbd> <button class="linkbtn" id="fc-reset" type="button">Скинути статистику карток</button></p>
+      <p class="fc-hint"><kbd>Клавіші: пробіл — показати, → знаю, ← не знаю.</kbd> <button class="linkbtn" id="fc-reset" type="button">Скинути статистику карток</button></p>
     </div>
     <div id="pr-exam" hidden>
       <h1>📝 Пробний іспит</h1>

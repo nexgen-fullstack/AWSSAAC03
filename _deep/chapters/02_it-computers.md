@@ -217,7 +217,7 @@ sudo systemctl restart nginx      # перезапустити вебсерве�
 
 <figure class="diagram" data-caption="Сходи абстракції: чим вище, тим менше турбот">
 <div class="flow">
-<div class="st"><b>🏢 Фізичний сервер</b>Купуєш, ставиш, ремонтуєш сам<small>Максимум контролю й турбот</small></div>
+<div class="st"><b>🏢 Фізичний сервер</b>Купуєш, ставиш, ремонтуєш самостійно<small>Максимум контролю й турбот</small></div>
 <span class="ar">→</span>
 <div class="st"><b>🖥️ Віртуальна машина</b>EC2: ОС і все вище — твоє<small>Залізо — турбота AWS</small></div>
 <span class="ar">→</span>

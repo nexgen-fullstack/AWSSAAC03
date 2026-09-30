@@ -111,7 +111,7 @@ SHARD=$(aws kinesis list-shards --stream-name clicks --query "Shards[0].ShardId"
 IT=$(aws kinesis get-shard-iterator --stream-name clicks --shard-id $SHARD --shard-iterator-type TRIM_HORIZON --query ShardIterator --output text)
 aws kinesis get-records --shard-iterator $IT --query "Records[].Data" --output text | tr '\t' '\n' | base64 -d; echo
 ```
-Ти прочитав записи з початку потоку (TRIM_HORIZON) — і можеш повторити це скільки завгодно разів: це і є replay.
+Записи прочитано з початку потоку (TRIM_HORIZON) — і це можна повторювати скільки завгодно разів: це і є replay.
 3. Створи bucket `khmarynka-lake-<цифри>`. **Amazon Data Firehose → Create Firehose stream**: Source **Amazon Kinesis Data Streams** → `clicks`; Destination **Amazon S3** → твій bucket; Buffer interval **60 секунд**. Create.
 4. Запиши ще кілька подій командою з кроку 2. Через 1–2 хвилини в bucket з'явиться об'єкт у префіксі з датою — Firehose склав потік у файл.
 **Прибери за собою:** видали Firehose stream, потім Data stream `clicks`; очисти й видали bucket; видали IAM-роль Firehose.

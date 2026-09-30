@@ -185,7 +185,7 @@ aws dynamodb put-item --table-name khm-orders \
 2. Перемкни консоль на **eu-west-1** → **AWS Backup → Backup vaults → Create backup vault**: назва `khm-dr`. Повернись у **eu-central-1**.
 3. **AWS Backup → Protected resources → Create on-demand backup**: тип **DynamoDB**, таблиця `khm-orders`, vault **Default**, IAM role **Default role**. Зачекай статусу **Completed** (Jobs).
 4. **Backup vaults → Default** → твоя точка відновлення → **Actions → Copy**: регіон **eu-west-1**, vault `khm-dr`. Зачекай завершення копіювання. (Якщо копіювання для DynamoDB недоступне — **Settings → Advanced features for Amazon DynamoDB backups → Enable**.)
-5. У **eu-west-1**: **Backup vaults → khm-dr** → точка відновлення → **Restore**: нова таблиця `khm-orders-restored`. Коли відновиться, у DynamoDB (eu-west-1) відкрий таблицю — замовлення **A-1001** на місці. Ти щойно провів **Backup & Restore DR** в іншому регіоні.
+5. У **eu-west-1**: **Backup vaults → khm-dr** → точка відновлення → **Restore**: нова таблиця `khm-orders-restored`. Коли відновиться, у DynamoDB (eu-west-1) відкрий таблицю — замовлення **A-1001** на місці. Це і є **Backup & Restore DR** в іншому регіоні — у мініатюрі.
 **Прибери за собою:** видали таблицю `khm-orders-restored` (eu-west-1) і `khm-orders` (eu-central-1); видали точки відновлення в обох vault (Backup vaults → vault → Delete); видали vault `khm-dr`.
 :::
 

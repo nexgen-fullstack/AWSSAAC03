@@ -200,7 +200,7 @@ aws accessanalyzer validate-policy --policy-type SERVICE_CONTROL_POLICY --policy
 
 - SCP — не IAM-політика: вона нічого не дозволяє, і ефективні права = перетин SCP і IAM.
 - Root **організації** (вершина дерева) ≠ root **user** акаунта.
-- SCP з allow-list без `FullAWSAccess` заблокує все, що явно не дозволено, — включно з сервісами, про які ти забув.
+- SCP з allow-list без `FullAWSAccess` заблокує все, що явно не дозволено, — включно з сервісами, про які легко забути.
 - Control Tower **використовує** Organizations, SCP і Config — це не заміна, а надбудова.
 
 ## ✅ Перевір себе
