@@ -1,6 +1,6 @@
 // Офлайн-режим глибокого курсу: сторінка — спершу з мережі (щоб бачити оновлення), без мережі — з кешу.
 const PREFIX = 'saadeep-';
-const CACHE = PREFIX + '8c1ba02f2b';
+const CACHE = PREFIX + 'a94e053769';
 const CORE = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => Promise.all(CORE.map(u => c.add(u).catch(() => null))))
