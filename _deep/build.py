@@ -1871,7 +1871,7 @@ def chapter_article(c, total, prev_c, next_c, print_mode=False):
             f'<p class="ch-score"></p>{nav}</article>')
 
 
-def build_home(chapters, services, n_tq):
+def build_home(chapters, services, n_tq, n_sets=1):
     modules, cards = [], {}
     for c in chapters:
         if c["module"] not in cards:
@@ -1889,6 +1889,7 @@ def build_home(chapters, services, n_tq):
     n_fig = sum(c["figs"] for c in chapters)
     n_lab = sum(1 for c in chapters if c["labs"])
     n_it = sum(1 for s in services if s["cat"] == "it")
+    n_ex = "пробний іспит" if n_sets == 1 else f"{n_sets} пробні іспити"
     return (f'<header class="hero"><h1>🎓 AWS Solutions Architect з нуля: глибоке навчання</h1>'
             f'<p class="sub">Підручник до іспиту <b>SAA-C03</b> для тих, хто починає з нуля: від «що таке сервер» до архітектури, '
             f'яку не соромно показати на співбесіді. Кожен розділ — історія компанії «Хмаринка», образ, глибоке пояснення, схеми, '
@@ -1896,7 +1897,7 @@ def build_home(chapters, services, n_tq):
             f'<div class="chips"><span>{plural(len(chapters), "розділ", "розділи", "розділів")}</span><span>~{round(hours)} год навчання</span>'
             f'<span>{plural(n_q, "питання", "питання", "питань")} «Перевір себе»</span><span>{plural(n_trg, "картка-тригер", "картки-тригери", "карток-тригерів")}</span>'
             f'<span>{plural(n_fig, "схема", "схеми", "схем")}</span><span>{plural(n_lab, "практика", "практики", "практик")} в AWS</span>'
-            f'<span>пробний іспит: {n_tq} питань</span></div>'
+            f'<span>{n_ex} · {plural(n_tq, "питання", "питання", "питань")}</span></div>'
             f'<div class="progress-card"><div class="bar"><span id="home-bar"></span></div><p id="home-progress"></p>'
             f'<a class="tb-btn primary" id="home-continue" href="#ch/{chapters[0]["id"]}">▶ Почати</a></div>'
             f'<div class="stats" id="home-stats"></div>'
@@ -1924,7 +1925,7 @@ def build_site(chapters, services, questions, sets, head_extra, pdf_href):
         "%%HEAD_EXTRA%%": head_extra,
         "%%CSS%%": CSS,
         "%%PDF%%": pdf_href,
-        "%%HOME%%": build_home(chapters, services, len(questions)),
+        "%%HOME%%": build_home(chapters, services, len(questions), len(sets)),
         "%%NQ%%": str(sum(c["q"] for c in chapters)),
         "%%NT%%": str(len(questions)),
         "%%TEMPLATES%%": "\n".join(tpls),
