@@ -17,6 +17,7 @@ import html
 import json
 import os
 import pathlib
+import random
 import re
 import shutil
 import subprocess
@@ -168,6 +169,11 @@ class Ctx:
 BOX_KINDS = {"lab", "deep", "note", "calc", "mnemo", "example", "story", "summary"}
 
 
+def shuffled_order(n, key):
+    """Детермінований порядок варіантів: однаковий між збірками, але правильні відповіді не збираються на A/B."""
+    return random.Random("saa-deep:" + key).sample(range(n), n)
+
+
 def render_quiz(lines, ctx):
     qs, cur, last = [], None, None
     for raw in lines:
@@ -202,6 +208,9 @@ def render_quiz(lines, ctx):
         if len(q["opts"]) < 3 or not q["ok"] or not q["why"]:
             raise ValueError(f"{qid}: неповне питання ({q['q'][:50]})")
         multi = len(q["ok"]) > 1
+        order = shuffled_order(len(q["opts"]), qid)
+        q["ok"] = sorted(order.index(i) for i in q["ok"])
+        q["opts"] = [q["opts"][j] for j in order]
         opts = "".join(f'<button class="qz-o" type="button" data-i="{i}"><span class="t-letter">{LETTERS[i]}</span>'
                        f'<span class="qz-ot">{inline(o)}</span></button>' for i, o in enumerate(q["opts"]))
         note = f'<div class="qz-note">Оберіть {len(q["ok"])} відповіді</div>' if multi else ""
@@ -539,7 +548,7 @@ def parse_questions(path, prefix):
             elif line.startswith("UA:"):
                 q["ua"] = inline(line[3:].strip())
             elif line.startswith("WHY:"):
-                q["why"] = inline(line[4:].strip())
+                q["why"] = line[4:].strip()
             else:
                 mo = re.match(r"^([A-F])(\*?):\s*(.*)$", line)
                 if not mo:
@@ -549,6 +558,24 @@ def parse_questions(path, prefix):
                 q["options"].append(inline(mo.group(3)))
         if not (q["en"] and q["ua"] and q["why"] and len(q["options"]) >= 4 and q["correct"]):
             raise ValueError(f"{path.name} Q{num}: неповне питання")
+        # перемішати варіанти й перерахувати букви (A), «B і D» у поясненні
+        n_opt = len(q["options"])
+        order = shuffled_order(n_opt, q["id"])
+        q["options"] = [q["options"][j] for j in order]
+        q["correct"] = sorted(order.index(i) for i in q["correct"])
+
+        def relabel(m, order=order, n_opt=n_opt):
+            old_i = ord(m.group(1)) - 65
+            return LETTERS[order.index(old_i)] if old_i < n_opt else m.group(1)
+        why = re.sub(r"(?<![\w-])([A-F])(?![\w-])", relabel, q["why"])
+
+        def sort_seq(m):  # «D і A» → «A і D», «(C, A)» → «(A, C)»
+            letters = sorted(re.findall(r"[A-F]", m.group(0)))
+            if " і " in m.group(0):
+                return ", ".join(letters[:-1]) + " і " + letters[-1]
+            return ", ".join(letters)
+        why = re.sub(r"(?<![\w-])[A-F](?:(?:, | і )[A-F])+(?![\w-])", sort_seq, why)
+        q["why"] = inline(why)
         q["multi"] = len(q["correct"]) > 1
         qs.append(q)
     return qs
